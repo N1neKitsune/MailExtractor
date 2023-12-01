@@ -44,10 +44,8 @@ $multiLineText = @"
 "@
 
 Write-Host $multiLineText
-# Read domain
 $domain = Read-Host "Enter the company's domain name (e.g. google.com)"
 
-# Function to extract email addresses from HTML content
 function ExtractEmails($htmlContent, $domain) {
     $emails = @()
     $matches = [regex]::Matches($htmlContent, '[a-zA-Z0-9._%+-]+@' + $domain)
@@ -57,15 +55,12 @@ function ExtractEmails($htmlContent, $domain) {
     return $emails | Select-Object -Unique
 }
 
-# Fetch and extract emails from Skymem
 $ResponseSkymem = Invoke-WebRequest -Uri "http://www.skymem.info/srch?q=$domain" -UseBasicParsing
 $MailsSkymem = ExtractEmails -htmlContent $ResponseSkymem.Content -domain $domain
 
-# Fetch and extract emails from EmailFormat
 $ResponseEmailFormat = Invoke-WebRequest -Uri "https://www.email-format.com/d/$domain/" -UseBasicParsing
 $MailsEmailFormat = ExtractEmails -htmlContent $ResponseEmailFormat.Content -domain $domain
 
-# Display Results
 Write-Host "`nResult:`n"
 Write-Host "--Skymmem--"
 if ($MailsSkymem -eq $null -or $MailsSkymem.Count -eq 0) {
