@@ -41,7 +41,7 @@ cat << "EOF"
  |_|  |_|\__,_|_|_| |______/_/\_\\__|_|  \__,_|\___|\__\___/|_|    
                                                                    
                                                                    
-Entrez le nom de domaine de l'entreprise (ex: neway-si.com) :
+Enter the company's domain name (e.g. google.com) :
 EOF
 read domain
 mails_skymem=$(curl --silent "http://www.skymem.info/srch?q=$domain" | grep "@$domain" | cut -d '>' -f2 | cut -d '<' -f1) >> /dev/null
