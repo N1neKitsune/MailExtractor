@@ -45,7 +45,7 @@ $multiLineText = @"
 
 Write-Host $multiLineText
 # Read domain
-$domain = Read-Host "Entrez le nom de domaine de l'entreprise (ex: neway-si.com)"
+$domain = Read-Host "Enter the company's domain name (e.g. google.com)"
 
 # Function to extract email addresses from HTML content
 function ExtractEmails($htmlContent, $domain) {
